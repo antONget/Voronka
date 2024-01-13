@@ -62,8 +62,6 @@ async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> N
 @router.callback_query(F.data == 'paper1')
 async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.message.answer(text="https://telegra.ph/Statya1-01-12")
-    if current_time < 22:
-        time.sleep(10 * minutes)
     keyboard = see_video(cb='video2')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image3'],
                                         caption=MESSAGE_TEXT['text3'],
