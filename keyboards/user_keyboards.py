@@ -5,7 +5,7 @@ from aiogram.types.web_app_info import WebAppInfo
 def web_app_keyboard():
     web_app_btn = KeyboardButton(
         text='КУПИТЬ',
-        web_app=WebAppInfo(url="https://ya.ru")
+        web_app=WebAppInfo(url="https://xn--80agfmikluu.guru/inozemtsev")
     )
     keyboard = ReplyKeyboardMarkup(
         keyboard=[[web_app_btn]],
