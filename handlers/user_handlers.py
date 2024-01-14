@@ -102,7 +102,7 @@ async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContex
 @router.callback_query(F.data == 'paper2')
 async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper2: {callback.message.chat.id}')
-    await callback.message.answer(text="https://telegra.ph/Statya2-01-12")
+    await callback.message.answer(text="https://telegra.ph/V-chyom-problema-kogda-u-tebya-pokupayut-menshe-chem-tebe-hotelos-by-01-14")
     await asyncio.sleep(6 * minutes)  # 6
     keyboard = see_video(cb='video3')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image4'],
@@ -179,7 +179,9 @@ async def process_buttons_press_ok(callback: CallbackQuery) -> None:
     logging.info(f'process_buttons_press_ok: {callback.message.chat.id}')
     await callback.message.answer(text=MESSAGE_TEXT['text10'])
     await asyncio.sleep(5 * minutes)  # 5
-    await callback.message.answer(text=MESSAGE_TEXT['text11'])
+    keyboard = programm()
+    await callback.message.answer(text=MESSAGE_TEXT['text11'],
+                                  reply_markup=keyboard)
 
 
 async def check_state_video(chek_state: str, message: Message, state: FSMContext):

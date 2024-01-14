@@ -91,15 +91,25 @@ def question2():
 
 def finish():
     button1 = InlineKeyboardButton(
-        text='Вопросов нет. Я вписываюсь',
+        text='Окей, покупаю!',
         callback_data='ok'
     )
     button2 = InlineKeyboardButton(
-        text='Еще вопросик',
+        text='А можно ещё вопросик?',
         callback_data='question'
     )
 
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[[button1, button2]]
+    )
+    return keyboard
+
+def programm():
+    button = InlineKeyboardButton(
+        text='ОЗНАКОМИТЬСЯ С ПРОГРАММОЙ',
+        url='https://xn--80agfmikluu.guru/inozemtsev#rec691409956'
+    )
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[[button]]
     )
     return keyboard
