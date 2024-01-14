@@ -140,7 +140,9 @@ async def process_buttons_press_paper3(callback: CallbackQuery, state: FSMContex
     await callback.message.answer(text="https://telegra.ph/Ctatya-3-01-12")
     await asyncio.sleep(10 * minutes)  # 10
     if await state.get_state() == f'Form:finish':
-        await callback.message.answer(text=MESSAGE_TEXT['text6'])
+        keyboard = programm()
+        await callback.message.answer(text=MESSAGE_TEXT['text6'],
+                                      reply_markup=keyboard)
     await asyncio.sleep(15 * minutes)  # 15
     if await state.get_state() == f'Form:finish':
         keyboard = question1()
@@ -179,9 +181,7 @@ async def process_buttons_press_ok(callback: CallbackQuery) -> None:
     logging.info(f'process_buttons_press_ok: {callback.message.chat.id}')
     await callback.message.answer(text=MESSAGE_TEXT['text10'])
     await asyncio.sleep(5 * minutes)  # 5
-    keyboard = programm()
-    await callback.message.answer(text=MESSAGE_TEXT['text11'],
-                                  reply_markup=keyboard)
+    await callback.message.answer(text=MESSAGE_TEXT['text11'])
 
 
 async def check_state_video(chek_state: str, message: Message, state: FSMContext):
