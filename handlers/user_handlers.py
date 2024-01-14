@@ -31,7 +31,7 @@ minutes = 60
 
 # Этот handler срабатывает на команду /start
 @router.message(CommandStart())
-async def process_start_command(message: Message, state: FSMContext, bot: Bot) -> None:
+async def process_start_command(message: Message, state: FSMContext) -> None:
     keyboard = web_app_keyboard()
     await message.answer(text=MESSAGE_TEXT['text0'],
                          reply_markup=keyboard)
@@ -48,7 +48,7 @@ async def process_start_command(message: Message, state: FSMContext, bot: Bot) -
 @router.callback_query(F.data == 'video1')
 async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.message.answer(f"{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
-    time.sleep(5 * minutes)
+    await asyncio.sleep(5 * minutes)
     keyboard = read_paper(cb='paper1')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image2'],
                                         caption=MESSAGE_TEXT['text2'],
@@ -62,7 +62,7 @@ async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> N
 @router.callback_query(F.data == 'paper1')
 async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.message.answer(text="https://telegra.ph/Statya1-01-12")
-    time.sleep(5 * minutes)
+    await asyncio.sleep(5 * minutes)
     keyboard = see_video(cb='video2')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image3'],
                                         caption=MESSAGE_TEXT['text3'],
@@ -76,7 +76,7 @@ async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> N
 @router.callback_query(F.data == 'video2')
 async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.message.answer(f"{LINK_VIDEO['video2']}{LINK_VIDEO['video2']}")
-    time.sleep(5 * minutes)
+    await asyncio.sleep(5 * minutes)
     keyboard = read_paper(cb='paper2')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image2'],
                                         caption=MESSAGE_TEXT['text55'],
@@ -90,7 +90,7 @@ async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> N
 @router.callback_query(F.data == 'paper2')
 async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.message.answer(text="https://telegra.ph/Statya2-01-12")
-    time.sleep(6 * minutes)
+    await asyncio.sleep(6 * minutes)
     keyboard = see_video(cb='video3')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image4'],
                                         caption=MESSAGE_TEXT['text4'],
@@ -104,7 +104,7 @@ async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> N
 @router.callback_query(F.data == 'video3')
 async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.message.answer(f"{LINK_VIDEO['video3']}{LINK_VIDEO['video3']}")
-    time.sleep(5 * minutes)
+    await asyncio.sleep(5 * minutes)
     keyboard = read_paper(cb='paper3')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image2'],
                                         caption=MESSAGE_TEXT['text5'],
@@ -119,9 +119,9 @@ async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> N
 async def process_buttons_press(callback: CallbackQuery, state: FSMContext) -> None:
     await state.clear()
     await callback.message.answer(text="https://telegra.ph/Ctatya-3-01-12")
-    time.sleep(10 * minutes)
+    await asyncio.sleep(10 * minutes)
     await callback.message.answer(text=MESSAGE_TEXT['text6'])
-    time.sleep(15 * minutes)
+    await asyncio.sleep(15 * minutes)
     keyboard = question1()
     await callback.message.answer(text=MESSAGE_TEXT['text7'],
                                   reply_markup=keyboard)
@@ -152,7 +152,7 @@ async def process_buttons_press(callback: CallbackQuery) -> None:
 @router.callback_query(F.data == 'ok')
 async def process_buttons_press(callback: CallbackQuery) -> None:
     await callback.message.answer(text=MESSAGE_TEXT['text10'])
-    time.sleep(5 * minutes)
+    await asyncio.sleep(5 * minutes)
     await callback.message.answer(text=MESSAGE_TEXT['text11'])
 
 
