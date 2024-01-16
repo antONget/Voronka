@@ -171,8 +171,9 @@ async def process_buttons_press_answer(callback: CallbackQuery) -> None:
 async def process_buttons_press_question(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_question: {callback.message.chat.id}')
     keyboard = question2()
-    await callback.message.answer(text=MESSAGE_TEXT['text9'],
-                                  reply_markup=keyboard)
+    await callback.message.answer_photo(photo=ID_TG_IMAGE['image5'],
+                                        caption=MESSAGE_TEXT['text9'],
+                                        reply_markup=keyboard)
     if await state.get_state() == f'Form:finish':
         await asyncio.sleep(15 * minutes)  # 15
         keyboard = finish()
