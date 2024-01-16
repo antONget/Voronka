@@ -180,13 +180,12 @@ async def process_buttons_press_question(callback: CallbackQuery, state: FSMCont
         await callback.message.answer(text=MESSAGE_TEXT['text8'],
                                       reply_markup=keyboard)
 
+
 # отправляем блок
 @router.callback_query(F.data == 'ok')
 async def process_buttons_press_ok(callback: CallbackQuery) -> None:
     logging.info(f'process_buttons_press_ok: {callback.message.chat.id}')
     await callback.message.answer(text=MESSAGE_TEXT['text10'])
-    await asyncio.sleep(5 * minutes)  # 5
-    await callback.message.answer(text=MESSAGE_TEXT['text11'])
 
 
 async def check_state_video(chek_state: str, message: Message, state: FSMContext):
