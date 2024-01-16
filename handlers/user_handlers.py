@@ -35,8 +35,12 @@ minutes = 2
 @router.message(CommandStart())
 async def process_start_command(message: Message, state: FSMContext) -> None:
     logging.info(f'process_start_command: {message.chat.id}')
+    if message.from_user.first_name != None:
+        hi = f'{message.from_user.first_name}, хай! '
+    else:
+        hi = ''
     keyboard = web_app_keyboard()
-    await message.answer(text=MESSAGE_TEXT['text0'],
+    await message.answer(text=hi+MESSAGE_TEXT['text0'],
                          reply_markup=keyboard)
     keyboard = see_video(cb='video1')
     await message.answer_photo(photo=ID_TG_IMAGE['image1'],
