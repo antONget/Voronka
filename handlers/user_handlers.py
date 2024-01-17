@@ -1,7 +1,7 @@
 from aiogram import Router, F
 from aiogram.filters import Command, CommandStart, StateFilter
 from aiogram.types import Message
-from lexicon.lexicon_ru import MESSAGE_TEXT, MESSAGE_VIDEO, MESSAGE_PAPER
+from lexicon.lexicon_ru import MESSAGE_TEXT, MESSAGE_VIDEO, MESSAGE_PAPER, MESSAGE_ANSWER, MESSAGE_GREETING
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup, default_state
 from keyboards.user_keyboards import *
@@ -42,30 +42,32 @@ async def process_start_command(message: Message, state: FSMContext) -> None:
     keyboard = web_app_keyboard()
     await message.answer(text=hi+MESSAGE_TEXT['text0'],
                          reply_markup=keyboard)
-    keyboard = see_video(cb='video1')
-    await message.answer_photo(photo=ID_TG_IMAGE['image1'],
-                               caption=MESSAGE_TEXT['text1'],
-                               reply_markup=keyboard)
-    await state.set_state(Form.video1)
-    await asyncio.sleep(60 * minutes)
-    await check_state_video('video1', message, state)
+    await message.answer(text=MESSAGE_GREETING['greet1'])
+
+    # keyboard = see_video(cb='video1')
+    # await message.answer_photo(photo=ID_TG_IMAGE['image1'],
+    #                            caption=MESSAGE_TEXT['text1'],
+    #                            reply_markup=keyboard)
+    # await state.set_state(Form.video1)
+    # await asyncio.sleep(60 * minutes)
+    # await check_state_video('video1', message, state)
 
 
 # нажата кнопка "Смотреть видео" и отправляется ссылка на первую статья
-@router.callback_query(F.data == 'video1')
-async def process_buttons_press_video1(callback: CallbackQuery, state: FSMContext) -> None:
-    logging.info(f'process_buttons_press_video1: {callback.message.chat.id}')
-    await callback.message.answer(f"{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
+# @router.callback_query(F.data == 'video1')
+# async def process_buttons_press_video1(callback: CallbackQuery, state: FSMContext) -> None:
+#     logging.info(f'process_buttons_press_video1: {callback.message.chat.id}')
+#     await callback.message.answer(f"{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
     await asyncio.sleep(5 * minutes)  # 5
     keyboard = read_paper(cb='paper1')
-    await callback.message.answer_photo(photo=ID_TG_IMAGE['image2'],
-                                        caption=MESSAGE_TEXT['text2'],
-                                        reply_markup=keyboard)
+    await message.answer_photo(photo=ID_TG_IMAGE['image2'],
+                               caption=MESSAGE_TEXT['text2'],
+                               reply_markup=keyboard)
     await state.set_state(Form.paper1)
     await asyncio.sleep(60 * minutes)  # 60
-    logging.info(f'process_buttons_press_video1: {callback.message.chat.id},'
+    logging.info(f'process_buttons_press_video1: {message.chat.id},'
                  f' check_state_paper: {await state.get_state()}')
-    await check_state_paper('paper1', callback.message, state)
+    await check_state_paper('paper1', message, state)
 
 
 # нажата кнопка "Читать статью" первую и отправлена ссылка на второе видео
@@ -163,7 +165,8 @@ async def process_buttons_press_paper3(callback: CallbackQuery, state: FSMContex
 @router.callback_query(F.data.startswith('answer'))
 async def process_buttons_press_answer(callback: CallbackQuery) -> None:
     logging.info(f'process_buttons_press_answer: {callback.message.chat.id}')
-    await callback.message.answer(f"{LINK_VIDEO[callback.data]}{LINK_VIDEO[callback.data]}")
+    await callback.message.answer(text=MESSAGE_ANSWER[callback.data])
+    # await callback.message.answer(f"{LINK_VIDEO[callback.data]}{LINK_VIDEO[callback.data]}")
 
 
 # отправляем блок с вопросами
