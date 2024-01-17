@@ -1,6 +1,6 @@
 LINK_VIDEO = {
     'video1': 'https://www.youtube.com/watch?v=xfLr-jcfGJU',
-    'video2': 'https://www.youtube.com/watch?v=xfLr-jcfGJU',
+    'video2': 'https://youtu.be/7XPcNFeGW9I',
     'video3': 'https://www.youtube.com/watch?v=xfLr-jcfGJU',
     'answer1': 'https://www.youtube.com/watch?v=xfLr-jcfGJU',
     'answer2': 'https://www.youtube.com/watch?v=xfLr-jcfGJU',
