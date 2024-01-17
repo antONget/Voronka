@@ -108,7 +108,7 @@ async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContex
 @router.callback_query(F.data == 'paper2')
 async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper2: {callback.message.chat.id}')
-    await callback.message.answer(text="https://salebot.site/md/072eb516ff2dc1ea7475b3251058975f", disable_web_page_preview=False)
+    await callback.message.answer(text="https://salebot.site/md/2c13eaf6796abdd666c9539923d76dc1")
     await asyncio.sleep(6 * minutes)  # 6
     keyboard = see_video(cb='video3')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image4'],
