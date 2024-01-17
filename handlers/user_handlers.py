@@ -59,8 +59,8 @@ async def process_start_command(message: Message, state: FSMContext) -> None:
 #     logging.info(f'process_buttons_press_video1: {callback.message.chat.id}')
 #     await callback.message.answer(f"{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
     await asyncio.sleep(5 * minutes)  # 5
-    # keyboard = read_paper(cb='paper1')
-    keyboard = read_paper_link()
+    keyboard = read_paper(cb='paper1')
+    # keyboard = read_paper_link(cb='paper1', url="https://salebot.site/md/4636ea9ee9de29dbe0c397eba4845347")
     await message.answer_photo(photo=ID_TG_IMAGE['image2'],
                                caption=MESSAGE_TEXT['text2'],
                                reply_markup=keyboard)
@@ -72,8 +72,7 @@ async def process_start_command(message: Message, state: FSMContext) -> None:
 
 
 # нажата кнопка "Читать статью" первую и отправлена ссылка на второе видео
-# @router.callback_query(F.data == 'paper1')
-@router.callback_query(lambda callback: callback.data == "button")
+@router.callback_query(F.data == 'paper1')
 async def process_buttons_press_paper1(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper1: {callback.message.chat.id}')
     await callback.message.answer(text="https://salebot.site/md/4636ea9ee9de29dbe0c397eba4845347")
@@ -110,7 +109,7 @@ async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContex
 @router.callback_query(F.data == 'paper2')
 async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper2: {callback.message.chat.id}')
-    await callback.message.answer(text="https://salebot.site/md/072eb516ff2dc1ea7475b3251058975f")
+    await callback.message.answer(text="https://salebot.site/md/072eb516ff2dc1ea7475b3251058975fhttps://salebot.site/md/072eb516ff2dc1ea7475b3251058975f")
     await asyncio.sleep(6 * minutes)  # 6
     keyboard = see_video(cb='video3')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image4'],

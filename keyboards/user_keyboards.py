@@ -36,10 +36,11 @@ def read_paper(cb):
     return keyboard
 
 
-def read_paper_link():
+def read_paper_link(cb, url):
     button = InlineKeyboardButton(
         text='ЧИТАЙ СТАТЬЮ',
-        url="https://salebot.site/md/4636ea9ee9de29dbe0c397eba4845347"
+        url=url,
+        callback_data=cb
     )
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[[button]]
