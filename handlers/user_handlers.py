@@ -72,7 +72,7 @@ async def process_buttons_press_video1(callback: CallbackQuery, state: FSMContex
 @router.callback_query(F.data == 'paper1')
 async def process_buttons_press_paper1(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper1: {callback.message.chat.id}')
-    await callback.message.answer(text="https://telegra.ph/Statya1-01-12")
+    await callback.message.answer(text="https://salebot.site/md/4636ea9ee9de29dbe0c397eba4845347")
     await asyncio.sleep(5 * minutes)  # 5
     keyboard = see_video(cb='video2')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image3'],
@@ -106,7 +106,7 @@ async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContex
 @router.callback_query(F.data == 'paper2')
 async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper2: {callback.message.chat.id}')
-    await callback.message.answer(text="https://telegra.ph/V-chyom-problema-kogda-u-tebya-pokupayut-menshe-chem-tebe-hotelos-by-01-14")
+    await callback.message.answer(text="https://salebot.site/md/072eb516ff2dc1ea7475b3251058975f")
     await asyncio.sleep(6 * minutes)  # 6
     keyboard = see_video(cb='video3')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image4'],
@@ -141,7 +141,7 @@ async def process_buttons_press_video3(callback: CallbackQuery, state: FSMContex
 async def process_buttons_press_paper3(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper3: {callback.message.chat.id}')
     await state.set_state(Form.finish)
-    await callback.message.answer(text="https://telegra.ph/Ctatya-3-01-12")
+    await callback.message.answer(text="https://salebot.site/md/2c13eaf6796abdd666c9539923d76dc1")
     await asyncio.sleep(10 * minutes)  # 10
     if await state.get_state() == f'Form:finish':
         keyboard = programm()
