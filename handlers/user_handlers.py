@@ -28,7 +28,7 @@ class Form(StatesGroup):
 
 # Создаем "базу данных" пользователей
 user_dict = {}
-minutes = 2
+minutes = 60
 
 
 # Этот handler срабатывает на команду /start
