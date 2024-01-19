@@ -28,7 +28,7 @@ class Form(StatesGroup):
 
 # Создаем "базу данных" пользователей
 user_dict = {}
-minutes = 60
+minutes = 2
 
 
 # Этот handler срабатывает на команду /start
@@ -88,14 +88,16 @@ async def process_start_command(message: Message, state: FSMContext, bot: Bot) -
 # нажата кнопка "Читать статью" первую и отправлена ссылка на второе видео
 @router.callback_query(F.data == 'paper1', StateFilter(Form.paper1))
 async def process_buttons_press_paper1(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.set_state(Form.video2)
     logging.info(f'process_buttons_press_paper1: {callback.message.chat.id}')
     await callback.message.answer(text="https://salebot.site/md/4636ea9ee9de29dbe0c397eba4845347")
+
     await asyncio.sleep(5 * minutes)  # 5
     keyboard = see_video(cb='video2')
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image3'],
                                         caption=MESSAGE_TEXT['text3'],
                                         reply_markup=keyboard)
-    await state.set_state(Form.video2)
+
     await asyncio.sleep(60 * minutes)  # 60
     logging.info(f'process_buttons_press_paper1: {callback.message.chat.id},'
                  f' check_state_video: {await state.get_state()}')
@@ -105,6 +107,7 @@ async def process_buttons_press_paper1(callback: CallbackQuery, state: FSMContex
 # нажата кнопка "Смотреть видео" и отправляется ссылка на первую статья
 @router.callback_query(F.data == 'video2', StateFilter(Form.video2))
 async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.set_state(Form.paper2)
     logging.info(f'process_buttons_press_video2: {callback.message.chat.id}')
     await callback.message.answer(f"{LINK_VIDEO['video2']}{LINK_VIDEO['video2']}")
     await asyncio.sleep(5 * minutes)  # 5
@@ -112,7 +115,7 @@ async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContex
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image2'],
                                         caption=MESSAGE_TEXT['text55'],
                                         reply_markup=keyboard)
-    await state.set_state(Form.paper2)
+
     await asyncio.sleep(60 * minutes)  # 60
     logging.info(f'process_buttons_press_video2: {callback.message.chat.id},'
                  f' check_state_paper: {await state.get_state()}')
@@ -122,6 +125,7 @@ async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContex
 # нажата кнопка "Смотреть видео" второе и отправляется ссылка на третье видео
 @router.callback_query(F.data == 'paper2', StateFilter(Form.paper2))
 async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.set_state(Form.video3)
     logging.info(f'process_buttons_press_paper2: {callback.message.chat.id}')
     await callback.message.answer(text="https://salebot.site/md/46e75406a82b897a21766243965ba569")
     await asyncio.sleep(6 * minutes)  # 6
@@ -129,7 +133,7 @@ async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContex
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image4'],
                                         caption=MESSAGE_TEXT['text4'],
                                         reply_markup=keyboard)
-    await state.set_state(Form.video3)
+
     await asyncio.sleep(60 * minutes)  # 60
     logging.info(f'process_buttons_press_paper2: {callback.message.chat.id},'
                  f' check_state_video: {await state.get_state()}')
@@ -139,6 +143,7 @@ async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContex
 # нажата кнопка "Смотреть видео" третье и отправлена ссылка на вторую статью
 @router.callback_query(F.data == 'video3', StateFilter(Form.video3))
 async def process_buttons_press_video3(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.set_state(Form.paper3)
     logging.info(f'process_buttons_press_video3: {callback.message.chat.id}')
     await callback.message.answer(f"{LINK_VIDEO['video3']}{LINK_VIDEO['video3']}")
     await asyncio.sleep(5 * minutes)  # 5
@@ -146,7 +151,7 @@ async def process_buttons_press_video3(callback: CallbackQuery, state: FSMContex
     await callback.message.answer_photo(photo=ID_TG_IMAGE['image2'],
                                         caption=MESSAGE_TEXT['text5'],
                                         reply_markup=keyboard)
-    await state.set_state(Form.paper3)
+
     await asyncio.sleep(60 * minutes)  # 60
     logging.info(f'process_buttons_press_video3: {callback.message.chat.id},'
                  f' check_state_paper: {await state.get_state()}')
