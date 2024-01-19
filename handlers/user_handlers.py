@@ -33,12 +33,26 @@ minutes = 60
 
 # Этот handler срабатывает на команду /start
 @router.message(CommandStart())
-async def process_start_command(message: Message, state: FSMContext) -> None:
+async def process_start_command(message: Message, state: FSMContext, bot: Bot) -> None:
     logging.info(f'process_start_command: {message.chat.id}')
     if message.from_user.first_name != None:
         hi = f'{message.from_user.first_name}, хай! '
+        await bot.send_message(chat_id=764196784,
+                               text=f'{message.chat.id} - '
+                                    f'Пользователь {message.from_user.first_name} '
+                                    f'зашел в воронку')
+        await bot.send_message(chat_id=843554518,
+                               text=f'{message.chat.id} - '
+                                    f'Пользователь {message.from_user.first_name} '
+                                    f'зашел в воронку')
     else:
         hi = ''
+        await bot.send_message(chat_id=764196784,
+                               text=f'{message.chat.id} - '
+                                    f'Пользователь зашел в воронку')
+        await bot.send_message(chat_id=843554518,
+                               text=f'{message.chat.id} - '
+                                    f'Пользователь зашел в воронку')
     keyboard = web_app_keyboard()
     await message.answer(text=hi+MESSAGE_TEXT['text0'],
                          reply_markup=keyboard)
@@ -72,7 +86,7 @@ async def process_start_command(message: Message, state: FSMContext) -> None:
 
 
 # нажата кнопка "Читать статью" первую и отправлена ссылка на второе видео
-@router.callback_query(F.data == 'paper1')
+@router.callback_query(F.data == 'paper1', StateFilter(Form.paper1))
 async def process_buttons_press_paper1(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper1: {callback.message.chat.id}')
     await callback.message.answer(text="https://salebot.site/md/4636ea9ee9de29dbe0c397eba4845347")
@@ -89,7 +103,7 @@ async def process_buttons_press_paper1(callback: CallbackQuery, state: FSMContex
 
 
 # нажата кнопка "Смотреть видео" и отправляется ссылка на первую статья
-@router.callback_query(F.data == 'video2')
+@router.callback_query(F.data == 'video2', StateFilter(Form.video2))
 async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_video2: {callback.message.chat.id}')
     await callback.message.answer(f"{LINK_VIDEO['video2']}{LINK_VIDEO['video2']}")
@@ -106,7 +120,7 @@ async def process_buttons_press_video2(callback: CallbackQuery, state: FSMContex
 
 
 # нажата кнопка "Смотреть видео" второе и отправляется ссылка на третье видео
-@router.callback_query(F.data == 'paper2')
+@router.callback_query(F.data == 'paper2', StateFilter(Form.paper2))
 async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper2: {callback.message.chat.id}')
     await callback.message.answer(text="https://salebot.site/md/46e75406a82b897a21766243965ba569")
@@ -123,7 +137,7 @@ async def process_buttons_press_paper2(callback: CallbackQuery, state: FSMContex
 
 
 # нажата кнопка "Смотреть видео" третье и отправлена ссылка на вторую статью
-@router.callback_query(F.data == 'video3')
+@router.callback_query(F.data == 'video3', StateFilter(Form.video3))
 async def process_buttons_press_video3(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_video3: {callback.message.chat.id}')
     await callback.message.answer(f"{LINK_VIDEO['video3']}{LINK_VIDEO['video3']}")
@@ -140,7 +154,7 @@ async def process_buttons_press_video3(callback: CallbackQuery, state: FSMContex
 
 
 # нажата кнопка "Читать статью" вторую и отправляется ОФФЕР
-@router.callback_query(F.data == 'paper3')
+@router.callback_query(F.data == 'paper3', StateFilter(Form.paper3))
 async def process_buttons_press_paper3(callback: CallbackQuery, state: FSMContext) -> None:
     logging.info(f'process_buttons_press_paper3: {callback.message.chat.id}')
     await state.set_state(Form.finish)
