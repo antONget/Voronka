@@ -58,7 +58,7 @@ async def process_start_command(message: Message, state: FSMContext) -> None:
 # async def process_buttons_press_video1(callback: CallbackQuery, state: FSMContext) -> None:
 #     logging.info(f'process_buttons_press_video1: {callback.message.chat.id}')
 #     await callback.message.answer(f"{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
-    await asyncio.sleep(5 * minutes)  # 5
+    await asyncio.sleep(0.5 * minutes)  # 5
     keyboard = read_paper(cb='paper1')
     # keyboard = read_paper_link()
     await message.answer_photo(photo=ID_TG_IMAGE['image2'],
