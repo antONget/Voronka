@@ -208,7 +208,8 @@ async def process_buttons_press_question(callback: CallbackQuery, state: FSMCont
 @router.callback_query(F.data == 'ok')
 async def process_buttons_press_ok(callback: CallbackQuery) -> None:
     logging.info(f'process_buttons_press_ok: {callback.message.chat.id}')
-    await callback.message.answer(text=MESSAGE_TEXT['text10'])
+    await callback.message.answer(text=MESSAGE_TEXT['text10'],
+                                  reply_markup=finish_cansel())
 
 
 async def check_state_video(chek_state: str, message: Message, state: FSMContext):

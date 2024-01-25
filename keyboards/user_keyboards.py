@@ -114,10 +114,22 @@ def finish():
     )
     return keyboard
 
+
 def programm():
     button = InlineKeyboardButton(
         text='ОЗНАКОМИТЬСЯ С ПРОГРАММОЙ',
         url='https://xn--80agfmikluu.guru/inozemtsev#rec691409956'
+    )
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[[button]]
+    )
+    return keyboard
+
+
+def finish_cansel():
+    button = InlineKeyboardButton(
+        text='ПОПАСТЬ НА ПРАКТИКУ',
+        url='https://xn--80agfmikluu.guru/inozemtsev'
     )
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[[button]]
